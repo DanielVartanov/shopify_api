@@ -6,5 +6,6 @@ module ActiveResource
 
     prepend ShopifyAPI::Connection::ResponseCapture
     prepend ShopifyAPI::Connection::RequestNotification
+    prepend ShopifyAPI::Connection::RedoIfTemporaryError
   end
 end

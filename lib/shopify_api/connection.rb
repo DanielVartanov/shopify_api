@@ -29,5 +29,24 @@ module ShopifyAPI
     end
 
     include RequestNotification
+
+    module RedoIfTemporaryError
+      def request(*args)
+        super
+      rescue ActiveResource::ClientError, ActiveResource::ServerError => e
+        if e.response.class.in?(Net::HTTPTooManyRequests, Net::HTTPInternalServerError)
+          wait
+          request *args
+        else
+          raise
+        end
+      end
+
+      def wait
+        sleep 0.5
+      end
+    end
+
+    include RedoIfTemporaryError
   end
 end
