@@ -34,7 +34,7 @@ module ShopifyAPI
       def request(*args)
         super
       rescue ActiveResource::ClientError, ActiveResource::ServerError => e
-        if e.response.class.in?(Net::HTTPTooManyRequests, Net::HTTPInternalServerError)
+        if should_retry? && e.response.class.in?(Net::HTTPTooManyRequests, Net::HTTPInternalServerError)
           wait
           request *args
         else
@@ -44,6 +44,10 @@ module ShopifyAPI
 
       def wait
         sleep 0.5
+      end
+
+      def should_retry?
+        [true, nil].include? Thread.current[:retry_temporary_errors]
       end
     end
 
