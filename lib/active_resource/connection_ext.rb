@@ -35,6 +35,8 @@ module ActiveResource
         if tries > 0 && e.response.class.in?(Net::HTTPTooManyRequests, Net::HTTPInternalServerError)
           wait
           retry
+        else
+          raise
         end
       end
 
