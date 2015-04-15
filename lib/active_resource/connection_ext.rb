@@ -28,11 +28,13 @@ module ActiveResource
 
     module RedoIfTemporaryError
       def request(*args)
+        tries ||= 5
         super
       rescue ActiveResource::ClientError, ActiveResource::ServerError => e
-        if e.response.class.in?(Net::HTTPTooManyRequests, Net::HTTPInternalServerError)
+        tries -= 1
+        if tries > 0 && e.response.class.in?(Net::HTTPTooManyRequests, Net::HTTPInternalServerError)
           wait
-          request *args
+          retry
         else
           raise
         end
