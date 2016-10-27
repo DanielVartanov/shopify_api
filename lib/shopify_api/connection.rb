@@ -34,7 +34,7 @@ module ShopifyAPI
       def request(*args)
         super
       rescue ActiveResource::ClientError, ActiveResource::ServerError => e
-        if should_retry? && e.response.class.in?(Net::HTTPTooManyRequests, Net::HTTPInternalServerError)
+        if should_retry? && e.response.class.in?([Net::HTTPTooManyRequests, Net::HTTPInternalServerError])
           wait
           request *args
         else
