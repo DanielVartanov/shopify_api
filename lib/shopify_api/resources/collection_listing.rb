@@ -1,9 +1,9 @@
 module ShopifyAPI
   class CollectionListing < Base
-    init_prefix :application
+    self.primary_key = :collection_id
 
-    def product_ids(options = {})
-      get("#{collection_id}/product_ids", options[:params])
+    def product_ids
+      get(:product_ids)
     end
   end
 end

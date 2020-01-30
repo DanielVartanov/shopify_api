@@ -1,3 +1,36 @@
+== Version 4.11.0
+
+* Added `ShopifyAPI::InventoryItem`
+* Added `ShopifyAPI::InventoryLevel`
+* Added `#inventory_levels` method to `ShopifyAPI::Location`
+
+== Version 4.10.0
+
+* Added `ShopifyAPI::AccessScope`
+
+== Version 4.9.1
+
+* Fix a bug with custom properties for orders
+
+== Version 4.9.0
+
+* Added `ShopifyAPI::PriceRule`
+* Added `ShopifyAPI::DiscountCode`
+
+== Version 4.8.0
+
+* Added `add_engagements` to `ShopifyAPI::MarketingEvent`
+
+== Version 4.7.1
+
+* Added support for URL parameter (e.g. limit & page) to ShopifyAPI::Metafields
+* Added support for URL parameter (e.g. limit & page) to metafield operator in ShopifyAPI::Shop
+
+== Version 4.7.0
+
+* Removed the mandatory `application_id` parameter from `ShopifyAPI::ProductListing` and `ShopifyAPI::CollectionListing`
+* Fixed a bug related to the non-standard primary key for `ShopifyAPI::ProductListing` and `ShopifyAPI::CollectionListing`
+
 == Version 4.6.0
 
 * Added `ShopifyAPI::Report`
